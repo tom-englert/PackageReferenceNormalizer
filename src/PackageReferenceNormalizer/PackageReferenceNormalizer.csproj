@@ -17,13 +17,16 @@
     <GitHubOrganization>tom-englert</GitHubOrganization>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageProjectUrl>http://github.com/$(GitHubOrganization)/$(PackageId)</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <Target Name="BuildInfo" BeforeTargets="GenerateNuspec">
+    <PropertyGroup>
+      <PackageProjectUrl>http://github.com/$(GitHubOrganization)/$(PackageId)</PackageProjectUrl>
+    </PropertyGroup>
     <Message Text="PackageOutputPath: $(PackageOutputPath)" />
+    <Message Text="PackageProjectUrl: $(PackageProjectUrl)" />
   </Target>
 
   <ItemGroup>
