@@ -4,7 +4,7 @@ trigger:
   batch: true
   tags: 
     include:
-    - '3.*'
+    - '1.*'
   branches:
     include:
     - '*'
@@ -40,5 +40,13 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: Packages'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)/Deploy'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Deploy'
     ArtifactName: Packages
+
+- task: NuGetCommand@2
+  condition: and(succeeded(), eq(variables.isRelease, 'true'))
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Deploy/*.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NuGet'
