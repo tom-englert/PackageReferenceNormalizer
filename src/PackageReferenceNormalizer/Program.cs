@@ -4,7 +4,8 @@ var fileSpec = args.FirstOrDefault();
 
 if (string.IsNullOrEmpty(fileSpec))
 {
-    Console.WriteLine("You must specify a file name or pattern");
+    Console.WriteLine(@"You must specify a file name or pattern:");
+    Console.WriteLine(@"e.g. PackageReferenceNormalizer c:\Dev\MyProject\*.csproj");
     return;
 }
 

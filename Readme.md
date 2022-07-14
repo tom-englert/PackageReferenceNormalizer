@@ -19,3 +19,17 @@ to
 - All elements are converted to attributes
 - `IncludeAssets` is removed if `PrivateAssets=All` 
 
+### Instllation
+
+To install the tool, run
+
+`dotnet tool install -g PackageReferenceNormalizer`
+
+### Usage
+Run `PackageReferenceNormalizer c:\Dev\MyProject\*.csproj`
+
+This will scan all `*.csproj` files in `c:\Dev\MyProject` and all sub-folders
+
+Run `PackageReferenceNormalizer *.csproj`
+
+This will scan all `*.csproj` files in the current directory and all sub-folders
