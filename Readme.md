@@ -1,6 +1,6 @@
 # Package Reference Normalizer
 
-A tool that scans your project file and converts
+A tool that scans your project files and converts
 
 ``` xml
 <PackageReference Include="MyPackage">

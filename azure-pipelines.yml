@@ -1,0 +1,55 @@
+name: $(Build.DefinitionName) $(date:yyyyMMdd)$(rev:.r)
+
+trigger:
+  batch: true
+  tags: 
+    include:
+    - '3.*'
+  branches:
+    include:
+    - '*'
+
+variables:
+  BuildPlatform: 'Any CPU'
+  BuildConfiguration: 'Release'
+  Solution: 'src\PackageReferenceNormalizer.sln'
+  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/tags/')]
+
+pool:
+  vmImage: 'windows-latest'
+  demands:
+  - msbuild
+  - vstest
+
+steps:
+- task: DeleteFiles@1
+  displayName: 'Delete files from Deploy'
+  inputs:
+    Contents: 'Deploy/**'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(Solution)'
+
+- task: MSBuild@1
+  displayName: 'Build Solution'
+  inputs:
+    solution: '$(Solution)'
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+    clean: true
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Packages'
+  inputs:
+    SourceFolder: Deploy
+    Contents: '*.*'
+    TargetFolder: '$(build.artifactstagingdirectory)/Packages'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Packages'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)/Packages'
+    ArtifactName: Packages
