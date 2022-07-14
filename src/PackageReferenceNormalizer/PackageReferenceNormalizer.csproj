@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -14,11 +14,20 @@
     <StagingDirectory>$(BUILD_ARTIFACTSTAGINGDIRECTORY)</StagingDirectory>
     <StagingDirectory Condition="'$(StagingDirectory)'==''">..\..</StagingDirectory>
     <PackageOutputPath>$(StagingDirectory)\Deploy</PackageOutputPath>
+    <GitHubOrganization>tom-englert</GitHubOrganization>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>http://github.com/$(GitHubOrganization)/$(PackageId)</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <Target Name="BuildInfo" BeforeTargets="GenerateNuspec">
     <Message Text="PackageOutputPath: $(PackageOutputPath)" />
   </Target>
+
+  <ItemGroup>
+    <None Include="..\..\Readme.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
 </Project>

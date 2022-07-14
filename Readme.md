@@ -1,5 +1,8 @@
 # Package Reference Normalizer
 
+[![Build Status](https://dev.azure.com/tom-englert/Open%20Source/_apis/build/status/tom-englert.PackageReferenceNormalizer?branchName=main)](https://dev.azure.com/tom-englert/Open%20Source/_build/latest?definitionId=50&branchName=main)
+[![NuGet Status](http://img.shields.io/nuget/v/PackageReferenceNormalizer.svg?style=flat-square)](https://www.nuget.org/packages/PackageReferenceNormalizer)
+
 A tool that scans your project files and converts
 
 ``` xml
