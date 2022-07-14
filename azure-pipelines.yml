@@ -22,10 +22,6 @@ pool:
   - vstest
 
 steps:
-- task: DeleteFiles@1
-  displayName: 'Delete files from Deploy'
-  inputs:
-    Contents: 'Deploy/**'
 
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
@@ -41,15 +37,8 @@ steps:
     configuration: '$(BuildConfiguration)'
     clean: true
 
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Packages'
-  inputs:
-    SourceFolder: Deploy
-    Contents: '*.*'
-    TargetFolder: '$(build.artifactstagingdirectory)/Packages'
-
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: Packages'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)/Packages'
+    PathtoPublish: '$(build.artifactstagingdirectory)/Deploy'
     ArtifactName: Packages

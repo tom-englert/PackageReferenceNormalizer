@@ -7,9 +7,18 @@
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>$(ProjectName)</ToolCommandName>
-    <PackageOutputPath>../../Deploy</PackageOutputPath>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>A tool that scans your project files and normalizes all PackageReference entries to single line entries that only use attribute notation.</Description>
   </PropertyGroup>
+
+  <PropertyGroup Label="Packaging">
+    <StagingDirectory>$(BUILD_ARTIFACTSTAGINGDIRECTORY)</StagingDirectory>
+    <StagingDirectory Condition="'$(StagingDirectory)'==''">..\..</StagingDirectory>
+    <PackageOutputPath>$(StagingDirectory)\Deploy</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <Target Name="BuildInfo" BeforeTargets="GenerateNuspec">
+    <Message Text="PackageOutputPath: $(PackageOutputPath)" />
+  </Target>
 
 </Project>

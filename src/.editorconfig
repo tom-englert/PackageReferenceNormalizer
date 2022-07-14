@@ -231,3 +231,9 @@ dotnet_diagnostic.CA1050.severity = none
 
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = none
+
+# CA1812: Program is an internal class that is apparently never instantiated
+dotnet_diagnostic.CA1812.severity = none
+
+# CA1014: Mark assemblies with CLSCompliant
+dotnet_diagnostic.CA1014.severity = none
