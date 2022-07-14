@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PackageReferenceNormalizer": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\dev\\Git\\VITA\\Source\\*.csproj"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+﻿<Project>
+  <PropertyGroup>
+    <!-- Common information -->
+    <Version>1.0.0</Version>
+    <Company>tom-englert.de</Company>
+    <Product>Toms Toolbox</Product>
+    <Copyright>Copyright © 2022 tom-englert.de</Copyright>
+    <Title Condition="'$(Title)' == ''">$(MSBuildProjectName)</Title>
+    <Authors Condition="'$(Authors)' == ''">$(Company)</Authors>
+    
+    <!-- Use the latest C# version -->
+    <LangVersion>10.0</LangVersion>
+
+    <!-- Have all info available for deterministic builds -->
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- Enable nullable reference types and force code to be compliant -->
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>nullable</WarningsAsErrors>
+
+    <!-- Switch on static analysis and turn on all checks  -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+
+  </PropertyGroup>
+
+  <!-- Enable deterministic builds https://docs.microsoft.com/en-us/dotnet/standard/library-guidance -->
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.AzureDevOpsServer.Git" Version="1.1.1" PrivateAssets="all" />
+    <SourceLinkAzureDevOpsServerGitHost Include="devops.avl.com" />
+  </ItemGroup>
+
+</Project>
